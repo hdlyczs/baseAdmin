@@ -34,5 +34,6 @@ export default {
   height: calc(100vh - 134px);
   position: relative;
   overflow-y: scroll;
+
 }
 </style>
