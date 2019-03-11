@@ -43,16 +43,17 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
+    levels:0,
     meta: { title: 'Example', icon: 'example' },
     children: [
       {
-        path: 'table',
+        path: '/example/table',
         name: 'Table',
         component: () => import('@/views/table/index'),
         meta: { title: 'Table', icon: 'table' }
       },
       {
-        path: 'tree',
+        path: '/example/tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
@@ -142,9 +143,13 @@ export const constantRouterMap = [
     ]
   },
 
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
+export const asyncRouterMap = [{ path: '*', redirect: '/404', hidden: true }]
+//这里有个坑如果将404跳转放在默认路由中的话 在动态路由页面刷新后悔指向404 
+//原因 => 刷新后在动态路由还未添加 所以造成地址跳转404
+//将重定向规则放在动态路由中一起添加 就OK了
 export default new Router({
   // mode: 'history', //后端支持可开
   scrollBehavior: () => ({ y: 0 }),

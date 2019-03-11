@@ -14,7 +14,7 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-
+import i18n from './lang' // Internationalization
 /**
  * This project originally used easy-mock to simulate data,
  * but its official service is very unstable,
@@ -33,5 +33,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })
