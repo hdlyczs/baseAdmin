@@ -1,11 +1,11 @@
 <template>
   <div class="dashboard-container">
     <div class="main">
-        <div class="main_top" v-if="titleName == true">
+        <div class="main_top" v-if="isShow1 == true">
           <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item name="1">
                 <template slot="title">
-                  标题名称<i class="close_title el-icon-close" @click="clickMe"></i>
+                  <b style="padding-left:8px;">标题名称</b><i class="close_title el-icon-close" @click="clickLeft"></i>
                 </template>
                 <div class="left_div">
                   <div class="left_content">
@@ -21,11 +21,11 @@
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="main_top_right" v-if="titleName == true">
+        <div class="main_top_right" v-if="isShow2 == true">
           <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item name="1">
+            <el-collapse-item name="2">
               <template slot="title">
-                标题名称<i class="close_title el-icon-close" @click="clickMe"></i>
+                <b style="padding-left:8px;">标题名称</b><i class="close_title el-icon-close" @click="clickRight"></i>
               </template>
               <div  class="process">
                 <el-progress type="circle" :percentage="todayPercentpage" color="red" :show-text="true"></el-progress>
@@ -33,51 +33,51 @@
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="main_center">
+        <div class="main_center" v-if="isShow3 == true">
           <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item name="1">
+            <el-collapse-item name="3">
               <template slot="title">
-                <b style="padding-left:8px;">7日日开户数统计</b><i class="close_title el-icon-close" @click="clickMe"></i>
+                <b style="padding-left:8px;">7日日开户数统计</b><i class="close_title el-icon-close" @click="clickDevSec"></i>
               </template>
               <div id="devSec" :style="{height:'125px',width:'100%'}"></div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="main_center">
+        <div class="main_center" v-if="isShow4 == true">
           <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item name="1">
+            <el-collapse-item name="4">
               <template slot="title">
-                <b style="padding-left:8px;">7日日抄表率统计</b><i class="close_title el-icon-close" @click="clickMe"></i>
+                <b style="padding-left:8px;">7日日抄表率统计</b><i class="close_title el-icon-close" @click="clickDevType"></i>
               </template>
               <div id="devType" :style="{height: '125px',width:'100%'}"></div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="main_footer">
+        <div class="main_footer" v-if="isShow5 == true">
           <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item name="1">
+            <el-collapse-item name="5">
               <template slot="title">
-                <b style="padding-left:8px;">7日日抄表率统计</b><i class="close_title el-icon-close" @click="clickMe"></i>
+                <b style="padding-left:8px;">7日日抄表率统计</b><i class="close_title el-icon-close" @click="clickCollectCount"></i>
               </template>
               <div id="collectCount" :style="{height: '125px',width:'100%'}"></div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="main_right">
-          <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item name="1">
+        <div class="main_right" v-if="isShow6 == true">
+          <el-collapse  v-model="activeNames" @change="handleChange">
+            <el-collapse-item name="6">
               <template slot="title">
-                <b style="padding-left:8px;">告警统计</b><i class="close_title el-icon-close" @click="clickMe"></i>
+                <b style="padding-left:8px;">告警统计</b><i class="close_title el-icon-close" @click="clickAlertCount"></i>
               </template>
               <div id="alertCount" :style="{height: '125px',width:'100%',marginLeft:'0.1%'}"></div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="main_right">
-          <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item name="1">
+        <div class="main_right"  v-if="isShow7 == true">
+          <el-collapse  v-model="activeNames" @change="handleChange">
+            <el-collapse-item name="7">
               <template slot="title">
-                <b style="padding-left:8px;">阀门状态</b><i class="close_title el-icon-close" @click="clickMe"></i>
+                <b style="padding-left:8px;">阀门状态</b><i class="close_title el-icon-close" @click="clickValveStatus"></i>
               </template>
               <div id="valveStatus" :style="{height: '125px',width:'100%'}"></div>
             </el-collapse-item>
@@ -99,18 +99,45 @@ export default {
   name: 'Dashboard',
   data(){
     return {
-        titleName:true,
-        activeNames: ['1'],
-        todayPercentpage:'50',//今日抄表率进度条显示变量
-
+        isShow1:true,
+        isShow2:true,
+        isShow3:true,
+        isShow4:true,
+        isShow5:true,
+        isShow6:true,
+        isShow7:true,
+        activeNames: ['1','2','3','4','5','6','7'],
+        todayPercentpage:50,//今日抄表率进度条显示变量
     }
   },
   methods:{
     handleChange(val) {
       console.log(val);
     },
-    clickMe(){
-      this.titleName = false;
+    clickLeft(){
+      this.isShow1 = false;
+    },
+    clickRight(){
+      this.isShow2 = false;
+    },
+    clickDevSec(){
+      this.isShow3 = false;
+    },
+    //关闭警告统计
+    clickDevType(){
+      this.isShow4 = false;
+    },
+    //7日日抄表统计
+    clickCollectCount(){
+      this.isShow5 = false;
+    },
+    //关闭警告统计
+    clickAlertCount(){
+      this.isShow6 = false;
+    },
+    //阀门状态
+    clickValveStatus(){
+      this.isShow7 = false;
     },
     //7日开户数统计
     drawDevSecChart(){
@@ -741,7 +768,7 @@ export default {
   flex-wrap:wrap;
   .main_top{
     width:49%;
-    margin:10px 0;
+    margin:8px 0;
     .close_title{
       margin-right: -40px;
       -webkit-transition: -webkit-transform .3s;
@@ -782,7 +809,7 @@ export default {
   }
   .main_top_right{
     width:49%;
-    margin:10px 0;
+    margin:8px 0;
     .close_title{
       margin-right: -40px;
       -webkit-transition: -webkit-transform .3s;
@@ -801,6 +828,7 @@ export default {
   }
   .main_center{
     width:49%;
+    margin:8px 0;
     .close_title{
       margin-right: -40px;
       -webkit-transition: -webkit-transform .3s;
@@ -815,7 +843,7 @@ export default {
   }
   .main_footer{
     width:49%;
-    margin-top: 10px;
+    margin:8px 0;
     .close_title{
       margin-right: -40px;
       -webkit-transition: -webkit-transform .3s;
@@ -830,8 +858,7 @@ export default {
   }
   .main_right{
     width:23.5%;
-    margin-top: 10px;
-
+    margin:8px 0;
     .close_title{
       margin-right: -40px;
       -webkit-transition: -webkit-transform .3s;
