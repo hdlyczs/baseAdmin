@@ -10,6 +10,7 @@ export default {
 }
 </script>
 <style>
+  @import url("styles/resetStyle.css");
 *{margin: 0;padding:0;}
 .user-dropdown{
   width: 200px;
